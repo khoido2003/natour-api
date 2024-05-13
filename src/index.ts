@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(mongoSanitize());
 
+// Create server
 const port = process.env.PORT || 8080;
 const server = http.createServer(app);
 
@@ -31,6 +32,7 @@ server.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
+// Connect to mongodb
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGO_URL);
 
@@ -39,4 +41,5 @@ mongoose.connection.on("error", (error: Error) => {
   console.log(error);
 });
 
+// Handle routes
 app.use("/", routers());

@@ -82,7 +82,7 @@ const tourSchema = new mongoose.Schema(
 
     ratingQuantity: {
       type: Number,
-      required: [true, "Rating must have a price"],
+      default: 0,
     },
     price: {
       type: Number,
@@ -196,12 +196,28 @@ tourSchema.pre<ITourQueryMiddleware>(/^find/, function (next) {
   next();
 });
 
-tourSchema.pre<ITourQueryMiddleware>(/^find/, function (next) {
-  this.populate({
-    path: "guides",
-    select: "-__v -passwordChangedAt",
-  });
-  next();
-});
+// tourSchema.pre<ITourQueryMiddleware>(/^find/, function (next) {
+//   this.populate({
+//     path: "guides",
+//     select: "-__v -passwordChangedAt",
+//   });
+//   next();
+// });
 
 export const TourModel = mongoose.model<ITourModel>("Tour", tourSchema);
+
+export const createTourFn = (values: Record<string, any>) => {
+  return new TourModel(values).save().then((tour) => tour.toObject());
+};
+
+export const getTourByIdFn = (id: string) => {
+  return TourModel.findById(id);
+};
+
+export const getAllTourFn = () => {
+  return TourModel.find({});
+};
+
+export const deleteTourByIdFn = (id: string) => {
+  return TourModel.findByIdAndDelete(id);
+};
