@@ -42,4 +42,4 @@ mongoose.connection.on("error", (error: Error) => {
 });
 
 // Handle routes
-app.use("/", routers());
+app.use("/api/v1", routers());

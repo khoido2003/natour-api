@@ -64,3 +64,15 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 });
+
+// Midleware
+userSchema.pre("save", async function (next) {
+  // Only run this function if password actuually modified
+  if (!this.isModified("password")) return next();
+
+  // Hash the password with the code 12
+});
+
+export const User = mongoose.model("User", userSchema);
+
+///////////////////////////////////////////

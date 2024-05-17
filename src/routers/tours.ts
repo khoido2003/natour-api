@@ -8,7 +8,7 @@ import {
 import express from "express";
 
 export default (router: express.Router) => {
-  router.route("/api/v1/top-5-tours").get(aliasTopTours, getAllTours);
-  router.route("/api/v1/tours").post(createTour).get(getAllTours);
-  router.route("/api/v1/tours/:id").get(getTour).delete(deleteTour);
+  router.route("/top-5-tours").get(aliasTopTours, getAllTours);
+  router.route("/tours").post(createTour).get(getAllTours);
+  router.route("/tours/:id").get(getTour).delete(deleteTour);
 };
