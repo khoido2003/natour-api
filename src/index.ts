@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import routers from "./routers/index";
+import { errorController } from "./controllers/errors";
 
 dotenv.config();
 
@@ -43,3 +44,4 @@ mongoose.connection.on("error", (error: Error) => {
 
 // Handle routes
 app.use("/api/v1", routers());
+app.use(errorController);
